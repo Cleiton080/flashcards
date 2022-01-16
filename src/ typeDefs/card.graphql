@@ -1,0 +1,8 @@
+type Query {
+  id: ID!
+  type: String
+  front: String
+  back: String
+  created_at: String
+  updated_at: String
+}
