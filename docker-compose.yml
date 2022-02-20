@@ -2,15 +2,17 @@ version: '3.4'
 services:
   database:
     image: postgres
+    container_name: 'flashcard_db'
     env_file: .env
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE}
     volumes:
-      - database
+      - postgres:/var/lib/postgresql/data
 
   api:
+    container_name: 'flashcard_api'
     build:
       context: .
       target: development
@@ -19,6 +21,8 @@ services:
     env_file: .env
     ports:
       - 3333:3333
+    volumes:
+      - ./:/app
 
 volumes:
-  database:
+  postgres:
