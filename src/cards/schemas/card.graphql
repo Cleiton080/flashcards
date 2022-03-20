@@ -1,8 +1,12 @@
-type Query {
+type Card {
   id: ID!
   type: String
   front: String
   back: String
   created_at: String
   updated_at: String
+}
+
+type Query {
+  cards: [Card]
 }
