@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateCardTable1645369549640 implements MigrationInterface {
+export class CreateReviewTable1648003357380 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
 
     await queryRunner.createTable(
       new Table({
-        name: 'cards',
+        name: 'reviews',
         columns: [
           {
             name: 'id',
@@ -17,25 +17,15 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
             default: `uuid_generate_v4()`,
           },
           {
-            name: 'front',
-            type: 'varchar(200)',
-          },
-          {
-            name: 'back',
-            type: 'varchar(200)',
-          },
-          {
-            name: 'ease',
-            type: 'float',
-            default: 2.5,
-          },
-          {
-            name: 'due',
+            name: 'delay_response',
             type: 'timestamp',
-            isNullable: true,
           },
           {
-            name: 'deck_id',
+            name: 'user_id',
+            type: 'uuid',
+          },
+          {
+            name: 'card_id',
             type: 'uuid',
           },
           {
@@ -53,6 +43,6 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('cards');
+    await queryRunner.dropTable('reviews');
   }
 }

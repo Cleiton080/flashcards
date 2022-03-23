@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateCardTable1645369549640 implements MigrationInterface {
+export class CreateDeckTable1648002222391 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
 
     await queryRunner.createTable(
       new Table({
-        name: 'cards',
+        name: 'decks',
         columns: [
           {
             name: 'id',
@@ -17,25 +17,41 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
             default: `uuid_generate_v4()`,
           },
           {
-            name: 'front',
-            type: 'varchar(200)',
+            name: 'name',
+            type: 'varchar(45)',
           },
           {
-            name: 'back',
-            type: 'varchar(200)',
+            name: 'learning_step_again',
+            type: 'int',
+            default: 1,
           },
           {
-            name: 'ease',
+            name: 'learning_step_good',
+            type: 'int',
+            default: 10,
+          },
+          {
+            name: 'graduating_interval',
+            type: 'int',
+            default: 1,
+          },
+          {
+            name: 'easy_interval',
+            type: 'int',
+            default: 4,
+          },
+          {
+            name: 'interval_modifier',
+            type: 'float',
+            default: 1,
+          },
+          {
+            name: 'easy_bonus',
             type: 'float',
             default: 2.5,
           },
           {
-            name: 'due',
-            type: 'timestamp',
-            isNullable: true,
-          },
-          {
-            name: 'deck_id',
+            name: 'language_id',
             type: 'uuid',
           },
           {
@@ -53,6 +69,6 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('cards');
+    await queryRunner.dropTable('decks');
   }
 }
