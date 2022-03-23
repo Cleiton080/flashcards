@@ -1,4 +1,4 @@
-import type { CardEntity } from './entities/card.entity';
+import type { CardEntity } from './card.entity';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

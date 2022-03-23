@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmService } from 'src/config/typeorm';
-import { GraphqlService } from './config/graphql';
 import { CardModule } from './cards/card.module';
+import { GraphqlService } from './config';
 
 @Module({
   imports: [
@@ -18,6 +17,5 @@ import { CardModule } from './cards/card.module';
     }),
     CardModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

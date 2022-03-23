@@ -1,5 +1,5 @@
-import { EntityRepository, Repository } from "typeorm";
-import { CardEntity } from "./entities/card.entity";
+import { EntityRepository, Repository } from 'typeorm';
+import { CardEntity } from './card.entity';
 
 @EntityRepository(CardEntity)
 export class CardRepository extends Repository<CardEntity> {}
