@@ -1,4 +1,4 @@
-import { CardEntity } from './entities/card.entity';
+import { CardEntity } from './card.entity';
 
 import { Query, Resolver } from '@nestjs/graphql';
 import { CardService } from './card.service';
