@@ -23,6 +23,7 @@ export class CreateLanguageTable1648002469251 implements MigrationInterface {
           {
             name: 'created_at',
             type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
           },
           {
             name: 'updated_at',

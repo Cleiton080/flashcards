@@ -1,0 +1,21 @@
+type Language {
+  id: ID!
+  name: String
+  created_at: String
+  updated_at: String
+}
+
+type Query {
+  languages: [Language]
+  language(id: ID!): Language
+}
+
+type Mutation {
+  createLanguage(input: LanguageInput!): Language
+  updateLanguage(id: ID!, input: LanguageInput!): Language
+  removeLanguage(id: ID!): Language
+}
+
+input LanguageInput {
+  name: String!
+}

@@ -6,7 +6,7 @@ import { join } from 'path';
 export class GraphqlService implements GqlOptionsFactory {
   async createGqlOptions(): Promise<GqlModuleOptions> {
     return {
-      typePaths: [join(__dirname, '..', '..', '**', 'schemas', '*.graphql')],
+      typePaths: [join(__dirname, '..', '..', '**', '*.graphql')],
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
