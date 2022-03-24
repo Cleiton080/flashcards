@@ -1,0 +1,32 @@
+type Deck {
+  id: ID!
+  name: String!
+  learning_step_again: Int
+  learning_step_good: Int
+  graduating_interval: Int
+  easy_interval: Int
+  interval_modifier: Float
+  easy_bonus: Float
+  language_id: String!
+  created_at: String
+  updated_at: String
+}
+
+type Query {
+  decks: [Deck]
+}
+
+type Mutation {
+  createDeck(input: DeckInput!): Deck
+}
+
+input DeckInput {
+  name: String!
+  learning_step_again: Int
+  learning_step_good: Int
+  graduating_interval: Int
+  easy_interval: Int
+  interval_modifier: Float
+  easy_bonus: Float
+  language_id: String!
+}

@@ -7,7 +7,7 @@ export default {
   type: 'postgres',
   entities: [join(__dirname, '..', '..', '*.entity.{ts, js}')],
   migrations: [join(__dirname, '..', '..', 'migrations', '*.{ts, js}')],
-  synchronize: true,
+  synchronize: false,
   autoLoadEntities: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,

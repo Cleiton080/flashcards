@@ -3,8 +3,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmService } from 'src/config/typeorm';
-import { CardModule } from './cards/card.module';
 import { GraphqlService } from './config';
+
+import { CardModule } from './cards/card.module';
+import { LanguageModule } from './languages/language.module';
+import { DeckModule } from './decks/deck.module';
 
 @Module({
   imports: [
@@ -16,6 +19,8 @@ import { GraphqlService } from './config';
       useClass: GraphqlService,
     }),
     CardModule,
+    LanguageModule,
+    DeckModule,
   ],
 })
 export class AppModule {}
