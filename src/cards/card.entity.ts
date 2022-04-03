@@ -1,8 +1,11 @@
+import { DeckEntity } from 'src/decks/deck.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -23,10 +26,14 @@ export class CardEntity extends BaseEntity {
   @Column('timestamp')
   due: Date;
 
-  @Column('uuid') // deck relationship
-  deck_id: string;
+  @ManyToOne(() => DeckEntity, (deck) => deck.cards)
+  @JoinColumn({ name: 'deck_id', referencedColumnName: 'id' })
+  deck!: DeckEntity;
 
-  @CreateDateColumn()
+  @Column('uuid')
+  deck_id!: string;
+
+  @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;
 
   @UpdateDateColumn()

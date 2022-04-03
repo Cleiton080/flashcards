@@ -19,7 +19,7 @@ export class DeckService {
 
   async find(id: string): Promise<DeckEntity> {
     return await this.deckRepository.findOne(id, {
-      relations: ['language'],
+      relations: ['language', 'cards'],
     });
   }
 

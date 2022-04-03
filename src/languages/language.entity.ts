@@ -22,8 +22,6 @@ export class LanguageEntity extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => DeckEntity, (deck) => deck.language, {
-    eager: true,
-  })
+  @OneToMany(() => DeckEntity, (deck) => deck.language)
   decks: DeckEntity[];
 }
