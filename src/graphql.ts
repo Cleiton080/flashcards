@@ -33,7 +33,8 @@ export interface Card {
 
 export interface IQuery {
     cards(): Nullable<Nullable<Card>[]> | Promise<Nullable<Nullable<Card>[]>>;
-    decks(): Nullable<Nullable<Deck>[]> | Promise<Nullable<Nullable<Deck>[]>>;
+    decks(): Nullable<Deck>[] | Promise<Nullable<Deck>[]>;
+    deck(id: string): Deck | Promise<Deck>;
     languages(): Nullable<Nullable<Language>[]> | Promise<Nullable<Nullable<Language>[]>>;
     language(id: string): Nullable<Language> | Promise<Nullable<Language>>;
 }
@@ -47,16 +48,9 @@ export interface Deck {
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
     easy_bonus?: Nullable<number>;
-    language_id: string;
+    language?: Nullable<Language>;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
-}
-
-export interface IMutation {
-    createDeck(input: DeckInput): Nullable<Deck> | Promise<Nullable<Deck>>;
-    createLanguage(input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
-    updateLanguage(id: string, input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
-    removeLanguage(id: string): Nullable<Language> | Promise<Nullable<Language>>;
 }
 
 export interface Language {
@@ -64,6 +58,15 @@ export interface Language {
     name?: Nullable<string>;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
+}
+
+export interface IMutation {
+    createDeck(input: DeckInput): Nullable<Deck> | Promise<Nullable<Deck>>;
+    updateDeck(id: string, input: DeckInput): Nullable<Deck> | Promise<Nullable<Deck>>;
+    removeDeck(id: string): Nullable<Deck> | Promise<Nullable<Deck>>;
+    createLanguage(input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
+    updateLanguage(id: string, input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
+    removeLanguage(id: string): Nullable<Language> | Promise<Nullable<Language>>;
 }
 
 type Nullable<T> = T | null;
