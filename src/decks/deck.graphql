@@ -10,7 +10,7 @@ type Deck {
   easy_interval: Int
   interval_modifier: Float
   easy_bonus: Float
-  language: Language
+  languages: [Language]!
   cards: [Card]
   created_at: String
   updated_at: String
@@ -27,6 +27,10 @@ type Mutation {
   removeDeck(id: ID!): Deck
 }
 
+input LanguageDeck {
+  id: ID!
+}
+
 input DeckInput {
   name: String!
   learning_step_again: Int
@@ -35,5 +39,5 @@ input DeckInput {
   easy_interval: Int
   interval_modifier: Float
   easy_bonus: Float
-  language_id: String!
+  languages: [LanguageDeck!]!
 }

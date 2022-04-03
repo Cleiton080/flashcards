@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ThrowStatement } from 'ts-morph';
 import { DeckEntity } from './deck.entity';
 import { DeckRepository } from './deck.repository';
 import { CreateDeckDto } from './dto/create-deck.dto';
@@ -14,12 +13,14 @@ export class DeckService {
   ) {}
 
   async all(): Promise<DeckEntity[]> {
-    return this.deckRepository.find();
+    return this.deckRepository.find({
+      relations: ['languages', 'cards'],
+    });
   }
 
   async find(id: string): Promise<DeckEntity> {
     return await this.deckRepository.findOne(id, {
-      relations: ['language', 'cards'],
+      relations: ['languages', 'cards'],
     });
   }
 
@@ -28,13 +29,15 @@ export class DeckService {
   }
 
   async update(id: string, updateDeckDto: UpdateDeckDto): Promise<DeckEntity> {
-    const deck = this.deckRepository.findOne(id);
+    const deck = await this.deckRepository.findOneOrFail(id);
+    const languagesId = deck.languages.map((language) => language.id);
 
-    if (!deck) {
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
-    }
+    await this.deckRepository.delete(languagesId);
 
-    return this.deckRepository.save({ ...updateDeckDto, id });
+    return this.deckRepository.save({
+      ...updateDeckDto,
+      id,
+    });
   }
 
   async delete(id: string): Promise<DeckEntity> {

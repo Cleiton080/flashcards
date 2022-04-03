@@ -5,11 +5,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
-  JoinColumn,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity('decks')
@@ -38,16 +38,25 @@ export class DeckEntity extends BaseEntity {
   @Column('float')
   easy_bonus: number;
 
-  @ManyToOne(() => LanguageEntity, (language) => language.decks, {
+  @ManyToMany(() => LanguageEntity, (language) => language.decks, {
     eager: true,
+    cascade: ['insert'],
   })
-  @JoinColumn({ name: 'language_id', referencedColumnName: 'id' })
-  language!: LanguageEntity;
+  @JoinTable({
+    name: 'languages_decks',
+    joinColumn: {
+      name: 'deck_id',
+    },
+    inverseJoinColumn: {
+      name: 'language_id',
+    },
+  })
+  languages!: LanguageEntity[];
 
   @OneToMany(() => CardEntity, (card) => card.deck, {
     eager: true,
   })
-  cards: CardEntity[];
+  cards!: CardEntity[];
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;

@@ -5,6 +5,8 @@ type Card {
   type: String
   front: String
   back: String
+  due: String
+  ease: Float
   deck: Deck
   created_at: String
   updated_at: String

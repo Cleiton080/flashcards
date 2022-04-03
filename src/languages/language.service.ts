@@ -13,11 +13,15 @@ export class LanguageService {
   ) {}
 
   async all(): Promise<LanguageEntity[]> {
-    return this.languageRepository.find();
+    return this.languageRepository.find({
+      relations: ['decks'],
+    });
   }
 
   async find(id: string): Promise<LanguageEntity> {
-    return this.languageRepository.findOne(id);
+    return this.languageRepository.findOne(id, {
+      relations: ['decks'],
+    });
   }
 
   async create(createLanguageDto: CreateLanguageDto): Promise<LanguageEntity> {

@@ -1,6 +1,9 @@
+#import "../../decks/deck.graphql"
+
 type Language {
   id: ID!
   name: String
+  decks: [Deck]!
   created_at: String
   updated_at: String
 }

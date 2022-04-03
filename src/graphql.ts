@@ -14,6 +14,10 @@ export interface CardInput {
     deck_id: string;
 }
 
+export interface LanguageDeck {
+    id: string;
+}
+
 export interface DeckInput {
     name: string;
     learning_step_again?: Nullable<number>;
@@ -22,7 +26,7 @@ export interface DeckInput {
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
     easy_bonus?: Nullable<number>;
-    language_id: string;
+    languages: LanguageDeck[];
 }
 
 export interface LanguageInput {
@@ -34,6 +38,8 @@ export interface Card {
     type?: Nullable<string>;
     front?: Nullable<string>;
     back?: Nullable<string>;
+    due?: Nullable<string>;
+    ease?: Nullable<number>;
     deck?: Nullable<Deck>;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
@@ -69,7 +75,7 @@ export interface Deck {
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
     easy_bonus?: Nullable<number>;
-    language?: Nullable<Language>;
+    languages: Nullable<Language>[];
     cards?: Nullable<Nullable<Card>[]>;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
@@ -78,6 +84,7 @@ export interface Deck {
 export interface Language {
     id: string;
     name?: Nullable<string>;
+    decks: Nullable<Deck>[];
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
 }
