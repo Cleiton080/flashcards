@@ -1,3 +1,6 @@
+#import "../../languages/language.graphql"
+#import "../../cards/card.graphql"
+
 type Deck {
   id: ID!
   name: String!
@@ -8,13 +11,7 @@ type Deck {
   interval_modifier: Float
   easy_bonus: Float
   language: Language
-  created_at: String
-  updated_at: String
-}
-
-type Language {
-  id: ID
-  name: String
+  cards: [Card]
   created_at: String
   updated_at: String
 }

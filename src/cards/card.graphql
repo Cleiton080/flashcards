@@ -1,12 +1,29 @@
+#import "../../cards/card.graphql"
+
 type Card {
   id: ID!
   type: String
   front: String
   back: String
+  deck: Deck
   created_at: String
   updated_at: String
 }
 
 type Query {
   cards: [Card]
+  card(id: ID!): Card
+}
+
+type Mutation {
+  createCard(input: CardInput): Card
+  updateCard(id: ID!, input: CardInput): Card
+  removeCard(id: ID!): Card
+}
+
+input CardInput {
+  type: String
+  front: String!
+  back: String!
+  deck_id: ID!
 }

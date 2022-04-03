@@ -57,6 +57,7 @@ export class CreateDeckTable1648002222391 implements MigrationInterface {
           {
             name: 'created_at',
             type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
           },
           {
             name: 'updated_at',

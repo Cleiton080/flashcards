@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsPositive,
   IsString,
+  IsUUID,
   Max,
 } from 'class-validator';
 
@@ -36,6 +37,6 @@ export class CreateDeckDto {
   easy_bonus: number;
 
   @IsNotEmpty()
-  @IsString()
+  @IsUUID()
   language_id: string;
 }

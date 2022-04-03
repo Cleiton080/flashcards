@@ -41,6 +41,7 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
           {
             name: 'created_at',
             type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
           },
           {
             name: 'updated_at',

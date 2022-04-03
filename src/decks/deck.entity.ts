@@ -1,3 +1,4 @@
+import { CardEntity } from 'src/cards/card.entity';
 import { LanguageEntity } from 'src/languages/language.entity';
 import {
   BaseEntity,
@@ -8,6 +9,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('decks')
@@ -36,9 +38,16 @@ export class DeckEntity extends BaseEntity {
   @Column('float')
   easy_bonus: number;
 
-  @ManyToOne(() => LanguageEntity, (language) => language.decks)
+  @ManyToOne(() => LanguageEntity, (language) => language.decks, {
+    eager: true,
+  })
   @JoinColumn({ name: 'language_id', referencedColumnName: 'id' })
   language!: LanguageEntity;
+
+  @OneToMany(() => CardEntity, (card) => card.deck, {
+    eager: true,
+  })
+  cards: CardEntity[];
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;
