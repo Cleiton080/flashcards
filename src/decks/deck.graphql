@@ -7,17 +7,27 @@ type Deck {
   easy_interval: Int
   interval_modifier: Float
   easy_bonus: Float
-  language_id: String!
+  language: Language
+  created_at: String
+  updated_at: String
+}
+
+type Language {
+  id: ID
+  name: String
   created_at: String
   updated_at: String
 }
 
 type Query {
-  decks: [Deck]
+  decks: [Deck]!
+  deck(id: ID!): Deck!
 }
 
 type Mutation {
   createDeck(input: DeckInput!): Deck
+  updateDeck(id: ID!, input: DeckInput!): Deck
+  removeDeck(id: ID!): Deck
 }
 
 input DeckInput {

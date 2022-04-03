@@ -1,8 +1,10 @@
+import { DeckEntity } from 'src/decks/deck.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -19,4 +21,9 @@ export class LanguageEntity extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => DeckEntity, (deck) => deck.language, {
+    eager: true,
+  })
+  decks: DeckEntity[];
 }

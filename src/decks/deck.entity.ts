@@ -1,19 +1,22 @@
+import { LanguageEntity } from 'src/languages/language.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('decks')
 export class DeckEntity extends BaseEntity {
   @PrimaryColumn('uuid', { generated: true, nullable: false })
-  id: string;
+  id!: string;
 
   @Column('varchar')
-  name: string;
+  name!: string;
 
   @Column('int')
   learning_step_again: number;
@@ -33,8 +36,9 @@ export class DeckEntity extends BaseEntity {
   @Column('float')
   easy_bonus: number;
 
-  @Column('varchar')
-  language_id: string;
+  @ManyToOne(() => LanguageEntity, (language) => language.decks)
+  @JoinColumn({ name: 'language_id', referencedColumnName: 'id' })
+  language!: LanguageEntity;
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;
