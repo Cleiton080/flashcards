@@ -1,42 +1,57 @@
+import { Type } from 'class-transformer';
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
   IsDecimal,
   IsInt,
   IsNotEmpty,
+  IsOptional,
   IsPositive,
   IsString,
-  IsUUID,
-  Max,
+  Length,
+  ValidateNested,
 } from 'class-validator';
+import { DeckLanguageDto } from './deck-language.dto';
 
 export class CreateDeckDto {
   @IsString()
   @IsNotEmpty()
-  @Max(45)
-  name: string;
+  @Length(1, 45)
+  readonly name: string;
 
   @IsInt()
   @IsPositive()
-  learning_step_again: number;
+  @IsOptional()
+  readonly learning_step_again: number;
 
   @IsInt()
   @IsPositive()
-  learning_step_good: number;
+  @IsOptional()
+  readonly learning_step_good: number;
 
   @IsInt()
   @IsPositive()
-  graduating_interval: number;
+  @IsOptional()
+  readonly graduating_interval: number;
 
   @IsInt()
   @IsPositive()
-  easy_interval: number;
+  @IsOptional()
+  readonly easy_interval: number;
 
   @IsDecimal()
-  interval_modifier: number;
+  @IsOptional()
+  readonly interval_modifier: number;
 
   @IsDecimal()
-  easy_bonus: number;
+  @IsOptional()
+  readonly easy_bonus: number;
 
-  @IsNotEmpty()
-  @IsUUID()
-  language_id: string;
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMaxSize(2)
+  @ArrayMinSize(2)
+  @Type(() => DeckLanguageDto)
+  readonly languages: DeckLanguageDto[];
 }

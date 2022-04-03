@@ -4,7 +4,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  JoinTable,
+  ManyToMany,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -22,6 +23,15 @@ export class LanguageEntity extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => DeckEntity, (deck) => deck.language)
+  @ManyToMany(() => DeckEntity, (deck) => deck.languages)
+  @JoinTable({
+    name: 'languages_decks',
+    joinColumn: {
+      name: 'language_id',
+    },
+    inverseJoinColumn: {
+      name: 'deck_id',
+    },
+  })
   decks: DeckEntity[];
 }
