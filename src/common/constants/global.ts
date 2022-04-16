@@ -13,4 +13,12 @@ const enviroment = {
 };
 const TYPEORM = enviroment[NODE_ENV];
 
-export { NODE_ENV, TYPEORM };
+// keycloak
+const KEYCLOAK = {
+  authServer: process.env.KEYCLOAK_AUTH_SERVER,
+  realm: process.env.KEYCLOAK_REALM,
+  clientId: process.env.KEYCLOAK_CLIENT_ID,
+  secret: process.env.KEYCLOAK_SECRET,
+};
+
+export { NODE_ENV, TYPEORM, KEYCLOAK };
