@@ -1,29 +1,40 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
   @PrimaryColumn('uuid', { generated: true, nullable: false })
-  id!: string;
+  readonly id!: string;
 
   @Column('varchar')
-  name!: string;
+  readonly email: string;
 
   @Column('varchar')
-  email!: string;
+  readonly email_constraint: string;
+
+  @Column('boolean')
+  readonly email_verified: boolean;
+
+  @Column('boolean')
+  readonly enabled: boolean;
 
   @Column('varchar')
-  password!: string;
+  readonly first_name: string;
 
-  @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  @Column('varchar')
+  readonly last_name: string;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @Column('varchar')
+  readonly realm_id: string;
+
+  @Column('varchar')
+  readonly username: string;
+
+  @Column('int')
+  readonly created_timestamp: number;
+
+  @Column('varchar')
+  readonly service_account_client_link: string;
+
+  @Column('int')
+  readonly not_before: number;
 }

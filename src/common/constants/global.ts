@@ -21,4 +21,12 @@ const KEYCLOAK = {
   secret: process.env.KEYCLOAK_SECRET,
 };
 
-export { NODE_ENV, TYPEORM, KEYCLOAK };
+const KEYCLOAKDB = {
+  host: process.env.KEYCLOAK_DATABASE_HOST,
+  port: parseInt(process.env.KEYCLOAK_DATABASE_PORT),
+  username: process.env.KEYCLOAK_DATABASE_USER,
+  password: process.env.KEYCLOAK_DATABASE_PASSWORD,
+  database: process.env.KEYCLOAK_DATABASE_NAME,
+};
+
+export { NODE_ENV, TYPEORM, KEYCLOAK, KEYCLOAKDB };
