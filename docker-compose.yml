@@ -53,6 +53,9 @@ services:
       DB_PASSWORD: ${KEYCLOAK_DATABASE_PASSWORD}
       KEYCLOAK_USER: ${KEYCLOAK_USER}
       KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
+    volumes:
+      - ./.docker/keycloak/imports:/opt/jboss/keycloak/imports
     depends_on:
       - keycloak-database
     ports:

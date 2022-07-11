@@ -14,7 +14,7 @@ export class CreateUserTable1647829859299 implements MigrationInterface {
     `);
     await queryRunner.query(`
       CREATE FOREIGN TABLE IF NOT EXISTS users (
-        id uuid not null,
+        id varchar(36) not null,
         email varchar(255),
         email_constraint varchar(255),
         email_verified boolean not null,
