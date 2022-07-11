@@ -9,7 +9,7 @@ export class UserResolver {
 
   @Query()
   @Unprotected()
-  async me(): Promise<UserEntity> {
-    return this.userService.me();
+  async whoami(): Promise<UserEntity> {
+    return this.userService.whoami();
   }
 }

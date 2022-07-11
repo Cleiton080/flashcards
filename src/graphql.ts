@@ -80,7 +80,7 @@ export interface IQuery {
     deck(id: string): Deck | Promise<Deck>;
     languages(): Nullable<Nullable<Language>[]> | Promise<Nullable<Nullable<Language>[]>>;
     language(id: string): Nullable<Language> | Promise<Nullable<Language>>;
-    me(): User | Promise<User>;
+    whoami(): User | Promise<User>;
 }
 
 export interface Deck {
@@ -108,11 +108,18 @@ export interface Language {
 
 export interface User {
     id: string;
-    name: string;
-    email: string;
-    password: string;
-    created_at?: Nullable<string>;
-    updated_at?: Nullable<string>;
+    email?: Nullable<string>;
+    email_constraint?: Nullable<string>;
+    email_verified: boolean;
+    enabled: boolean;
+    federation_link?: Nullable<string>;
+    first_name?: Nullable<string>;
+    last_name?: Nullable<string>;
+    realm_id?: Nullable<string>;
+    username?: Nullable<string>;
+    created_timestamp?: Nullable<number>;
+    service_account_client_link?: Nullable<string>;
+    not_before?: Nullable<number>;
 }
 
 type Nullable<T> = T | null;

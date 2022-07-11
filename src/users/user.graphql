@@ -1,12 +1,19 @@
 type User {
   id: ID!
-  name: String!
-  email: String!
-  password: String!
-  created_at: String
-  updated_at: String
+  email: String
+  email_constraint: String
+  email_verified: Boolean!
+  enabled: Boolean!
+  federation_link: String
+  first_name: String
+  last_name: String
+  realm_id: String
+  username: String
+  created_timestamp: Int
+  service_account_client_link: String
+  not_before: Int
 }
 
 type Query {
-  me: User!
+  whoami: User!
 }
