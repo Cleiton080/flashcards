@@ -10,7 +10,7 @@ export class UserService {
     private userRepository: UserRepository,
   ) {}
 
-  async whoami(): Promise<UserEntity> {
-    return this.userRepository.findOneOrFail();
+  async whoami(context: any): Promise<UserEntity> {
+    return this.userRepository.findOneOrFail(context.req.user.sub);
   }
 }
