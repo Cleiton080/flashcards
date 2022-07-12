@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "migration:create": "typeorm migration:create --dir src/migrations -n",
+    "migration:create": "typeorm migration:create",
     "migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run --dataSource src/config/typeorm/ormconfig.ts",
     "migration:rollback": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert --dataSource src/config/typeorm/ormconfig.ts",
     "build": "nest build",
