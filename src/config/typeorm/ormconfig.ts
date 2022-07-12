@@ -1,8 +1,8 @@
 import { join } from 'path';
-import { ConnectionOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { TYPEORM } from '../../common/constants/global';
 
-export default {
+export default new DataSource({
   ...TYPEORM,
   type: 'postgres',
   entities: [join(__dirname, '..', '..', '*.entity.{ts, js}')],
@@ -16,4 +16,4 @@ export default {
   cli: {
     migrationDir: join(__dirname, '..', '..', 'migrations'),
   },
-} as ConnectionOptions;
+});

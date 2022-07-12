@@ -20,7 +20,8 @@ export class CardService {
   }
 
   async find(id: string): Promise<CardEntity> {
-    return this.cardRepository.findOne(id, {
+    return this.cardRepository.findOne({
+      where: { id },
       relations: ['deck', 'deck.language'],
     });
   }
@@ -30,7 +31,7 @@ export class CardService {
   }
 
   async update(id: string, updateCardDto: UpdateCardDto): Promise<CardEntity> {
-    const deck = this.cardRepository.findOne(id);
+    const deck = this.cardRepository.findOne({ where: { id } });
 
     if (!deck) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
@@ -40,7 +41,7 @@ export class CardService {
   }
 
   async delete(id: string): Promise<CardEntity> {
-    const card = await this.cardRepository.findOne(id);
+    const card = await this.cardRepository.findOne({ where: { id } });
 
     if (!card) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);

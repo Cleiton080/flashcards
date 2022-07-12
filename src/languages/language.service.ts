@@ -19,7 +19,8 @@ export class LanguageService {
   }
 
   async find(id: string): Promise<LanguageEntity> {
-    return this.languageRepository.findOne(id, {
+    return this.languageRepository.findOne({
+      where: { id },
       relations: ['decks'],
     });
   }
@@ -32,7 +33,7 @@ export class LanguageService {
     id: string,
     updateLanguageDto: UpdateLanguageDto,
   ): Promise<LanguageEntity> {
-    const language = await this.languageRepository.findOne(id);
+    const language = await this.languageRepository.findOne({ where: { id } });
 
     if (!language) {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
@@ -42,7 +43,7 @@ export class LanguageService {
   }
 
   async delete(id: string): Promise<LanguageEntity> {
-    const language = await this.languageRepository.findOne(id);
+    const language = await this.languageRepository.findOne({ where: { id } });
 
     return this.languageRepository.remove(language);
   }

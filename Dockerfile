@@ -2,14 +2,12 @@ FROM node:16-alpine AS development
 
 WORKDIR /app
 
-COPY package*.json ./
-
-RUN npm i
+RUN yarn global add @nestjs/cli
 
 COPY ./ ./
 
-RUN npm i -g @nestjs/cli
+RUN yarn
 
-ENTRYPOINT ["npm", "run", "start:dev"]
+ENTRYPOINT ["yarn", "start:dev"]
 
 EXPOSE 3333

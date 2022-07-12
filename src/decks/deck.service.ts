@@ -19,7 +19,8 @@ export class DeckService {
   }
 
   async find(id: string): Promise<DeckEntity> {
-    return await this.deckRepository.findOne(id, {
+    return await this.deckRepository.findOne({
+      where: { id },
       relations: ['languages', 'cards'],
     });
   }
@@ -29,7 +30,7 @@ export class DeckService {
   }
 
   async update(id: string, updateDeckDto: UpdateDeckDto): Promise<DeckEntity> {
-    const deck = await this.deckRepository.findOneOrFail(id);
+    const deck = await this.deckRepository.findOneOrFail({ where: { id } });
     const languagesId = deck.languages.map((language) => language.id);
 
     await this.deckRepository.delete(languagesId);
@@ -41,7 +42,7 @@ export class DeckService {
   }
 
   async delete(id: string): Promise<DeckEntity> {
-    const language = await this.deckRepository.findOne(id);
+    const language = await this.deckRepository.findOne({ where: { id } });
 
     if (!language) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
