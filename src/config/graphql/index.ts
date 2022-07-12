@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { GqlOptionsFactory, GqlModuleOptions } from '@nestjs/graphql';
+import { GqlOptionsFactory } from '@nestjs/graphql';
+import { ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 
 @Injectable()
 export class GraphqlService implements GqlOptionsFactory {
-  async createGqlOptions(): Promise<GqlModuleOptions> {
+  async createGqlOptions(): Promise<ApolloDriverConfig> {
     return {
       typePaths: [join(__dirname, '..', '..', '**', '*.graphql')],
       definitions: {

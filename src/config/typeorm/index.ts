@@ -5,6 +5,6 @@ import Ormconfig from './ormconfig';
 @Injectable()
 export class TypeOrmService implements TypeOrmOptionsFactory {
   async createTypeOrmOptions(): Promise<TypeOrmModuleOptions> {
-    return Ormconfig;
+    return Ormconfig.options;
   }
 }

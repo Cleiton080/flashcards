@@ -3,6 +3,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ApolloDriver } from '@nestjs/apollo';
 import {
   KeycloakConnectModule,
   AuthGuard,
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
       useClass: TypeOrmService,
     }),
     GraphQLModule.forRootAsync({
+      driver: ApolloDriver,
       useClass: GraphqlService,
     }),
     KeycloakConnectModule.registerAsync({
