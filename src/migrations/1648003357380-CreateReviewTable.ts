@@ -21,10 +21,6 @@ export class CreateReviewTable1648003357380 implements MigrationInterface {
             type: 'timestamp',
           },
           {
-            name: 'user_id',
-            type: 'uuid',
-          },
-          {
             name: 'card_id',
             type: 'uuid',
           },

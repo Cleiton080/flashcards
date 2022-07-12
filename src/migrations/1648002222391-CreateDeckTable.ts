@@ -51,6 +51,10 @@ export class CreateDeckTable1648002222391 implements MigrationInterface {
             default: 2.5,
           },
           {
+            name: 'user_id',
+            type: 'uuid',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
