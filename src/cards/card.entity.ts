@@ -1,4 +1,5 @@
 import { DeckEntity } from 'src/decks/deck.entity';
+import { ReviewEntity } from 'src/reviews/review.entity';
 import {
   BaseEntity,
   Column,
@@ -6,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -25,6 +27,9 @@ export class CardEntity extends BaseEntity {
 
   @Column('timestamp')
   due: Date;
+
+  @OneToMany(() => ReviewEntity, (review) => review.card)
+  reviews: ReviewEntity[];
 
   @ManyToOne(() => DeckEntity, (deck) => deck.cards)
   @JoinColumn({ name: 'deck_id', referencedColumnName: 'id' })
