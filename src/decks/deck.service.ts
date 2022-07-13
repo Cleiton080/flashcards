@@ -1,15 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeckEntity } from './deck.entity';
-import { DeckRepository } from './deck.repository';
-import { CreateDeckDto } from './dto/create-deck.dto';
-import { UpdateDeckDto } from './dto/update-deck.dto';
+import { Repository } from 'typeorm';
+import { DeckEntity } from 'src/decks/deck.entity';
+import { CreateDeckDto } from 'src/decks/dto/create-deck.dto';
+import { UpdateDeckDto } from 'src/decks/dto/update-deck.dto';
 
 @Injectable()
 export class DeckService {
   constructor(
-    @InjectRepository(DeckRepository)
-    private deckRepository: DeckRepository,
+    @InjectRepository(DeckEntity)
+    private deckRepository: Repository<DeckEntity>,
   ) {}
 
   async all(): Promise<DeckEntity[]> {

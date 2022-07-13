@@ -1,11 +1,11 @@
 import { join } from 'path';
 import { DataSource } from 'typeorm';
-import { TYPEORM } from '../../common/constants/global';
+import { TYPEORM } from 'src/common/constants/global';
 
 export default new DataSource({
   ...TYPEORM,
   type: 'postgres',
-  entities: [join(__dirname, '..', '..', '*.entity.{ts, js}')],
+  entities: [join(__dirname, '..', '..', '**', '*.entity.{ts, js}')],
   migrations: [join(__dirname, '..', '..', 'migrations', '*.{ts, js}')],
   synchronize: false,
   autoLoadEntities: true,

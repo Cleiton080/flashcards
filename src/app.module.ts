@@ -11,13 +11,13 @@ import {
   RoleGuard,
 } from 'nest-keycloak-connect';
 
-import { GraphqlService, TypeOrmService, KeycloakService } from './config';
+import { GraphqlService, TypeOrmService, KeycloakService } from 'src/config';
 
-import { CardModule } from './cards/card.module';
-import { LanguageModule } from './languages/language.module';
-import { DeckModule } from './decks/deck.module';
-import { UserModule } from './users/user.module';
-import { AuthModule } from './auth/auth.module';
+import { CardModule } from 'src/cards/card.module';
+import { LanguageModule } from 'src/languages/language.module';
+import { DeckModule } from 'src/decks/deck.module';
+import { UserModule } from 'src/users/user.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [

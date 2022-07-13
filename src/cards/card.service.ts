@@ -1,16 +1,16 @@
-import type { CardEntity } from './card.entity';
-
+import { Repository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CardRepository } from './card.repository';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+
+import { CardEntity } from 'src/cards/card.entity';
+import { CreateCardDto } from 'src/cards/dto/create-card.dto';
+import { UpdateCardDto } from 'src/cards/dto/update-card.dto';
 
 @Injectable()
 export class CardService {
   constructor(
-    @InjectRepository(CardRepository)
-    private cardRepository: CardRepository,
+    @InjectRepository(CardEntity)
+    private cardRepository: Repository<CardEntity>,
   ) {}
 
   async all(): Promise<CardEntity[]> {

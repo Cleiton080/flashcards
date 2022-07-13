@@ -1,15 +1,15 @@
+import { Repository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateLanguageDto } from './dto/create-language.dto';
-import { UpdateLanguageDto } from './dto/update-language.dto';
-import { LanguageEntity } from './language.entity';
-import { LanguageRepository } from './language.repository';
+import { CreateLanguageDto } from 'src/languages/dto/create-language.dto';
+import { UpdateLanguageDto } from 'src/languages/dto/update-language.dto';
+import { LanguageEntity } from 'src/languages/language.entity';
 
 @Injectable()
 export class LanguageService {
   constructor(
-    @InjectRepository(LanguageRepository)
-    private languageRepository: LanguageRepository,
+    @InjectRepository(LanguageEntity)
+    private languageRepository: Repository<LanguageEntity>,
   ) {}
 
   async all(): Promise<LanguageEntity[]> {
