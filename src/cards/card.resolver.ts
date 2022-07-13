@@ -1,10 +1,10 @@
-import { CardEntity } from './card.entity';
-
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CardService } from './card.service';
 import { ParseUUIDPipe } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+import { CardEntity } from 'src/cards/card.entity';
+import { CardService } from 'src/cards/card.service';
+import { CreateCardDto } from 'src/cards/dto/create-card.dto';
+import { UpdateCardDto } from 'src/cards/dto/update-card.dto';
+import { ReviewCard } from 'src/cards/card.interface';
 
 @Resolver('Card')
 export class CardResolver {
@@ -38,5 +38,17 @@ export class CardResolver {
   @Mutation()
   async removeCard(@Args('id', ParseUUIDPipe) id: string): Promise<CardEntity> {
     return this.cardService.delete(id);
+  }
+
+  @Query()
+  async reviewCards(
+    @Args('deckId', ParseUUIDPipe) deckId: string,
+  ): Promise<ReviewCard> {
+    const [cards, total] = await this.cardService.reviews(deckId);
+
+    return {
+      total,
+      cards,
+    };
   }
 }

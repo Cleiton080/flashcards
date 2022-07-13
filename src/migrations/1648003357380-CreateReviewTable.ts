@@ -18,7 +18,7 @@ export class CreateReviewTable1648003357380 implements MigrationInterface {
           },
           {
             name: 'delay_response',
-            type: 'timestamp',
+            type: 'interval minute',
           },
           {
             name: 'card_id',

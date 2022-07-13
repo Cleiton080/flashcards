@@ -38,6 +38,12 @@ export interface LanguageInput {
     name: string;
 }
 
+export interface ReviewInput {
+    cardId: string;
+    cardAnswearId: string;
+    delayResponse: string;
+}
+
 export interface Auth {
     access_token: string;
     expires_in: number;
@@ -59,6 +65,7 @@ export interface IMutation {
     createLanguage(input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
     updateLanguage(id: string, input: LanguageInput): Nullable<Language> | Promise<Nullable<Language>>;
     removeLanguage(id: string): Nullable<Language> | Promise<Nullable<Language>>;
+    createReview(input: ReviewInput): Nullable<Review> | Promise<Nullable<Review>>;
 }
 
 export interface Card {
@@ -73,13 +80,21 @@ export interface Card {
     updated_at?: Nullable<string>;
 }
 
+export interface ReviewCard {
+    total: number;
+    cards: Nullable<Card>[];
+}
+
 export interface IQuery {
     cards(): Nullable<Nullable<Card>[]> | Promise<Nullable<Nullable<Card>[]>>;
     card(id: string): Nullable<Card> | Promise<Nullable<Card>>;
+    reviewCards(deckId: string): Nullable<ReviewCard> | Promise<Nullable<ReviewCard>>;
     decks(): Nullable<Deck>[] | Promise<Nullable<Deck>[]>;
     deck(id: string): Deck | Promise<Deck>;
     languages(): Nullable<Nullable<Language>[]> | Promise<Nullable<Nullable<Language>[]>>;
     language(id: string): Nullable<Language> | Promise<Nullable<Language>>;
+    reviews(): Nullable<Review[]> | Promise<Nullable<Review[]>>;
+    review(id: string): Nullable<Review> | Promise<Nullable<Review>>;
     whoami(): User | Promise<User>;
 }
 
@@ -102,6 +117,14 @@ export interface Language {
     id: string;
     name?: Nullable<string>;
     decks: Nullable<Deck>[];
+    created_at?: Nullable<string>;
+    updated_at?: Nullable<string>;
+}
+
+export interface Review {
+    id: string;
+    delay_response: string;
+    card: Card;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
 }

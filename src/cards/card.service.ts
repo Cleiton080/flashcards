@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { LessThanOrEqual, Repository, IsNull } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -22,7 +22,7 @@ export class CardService {
   async find(id: string): Promise<CardEntity> {
     return this.cardRepository.findOne({
       where: { id },
-      relations: ['deck', 'deck.language'],
+      relations: ['deck', 'deck.languages'],
     });
   }
 
@@ -50,5 +50,16 @@ export class CardService {
     this.cardRepository.remove(card);
 
     return card;
+  }
+
+  async reviews(deckId: string): Promise<[CardEntity[], number]> {
+    const cards = await this.cardRepository.findAndCount({
+      where: [
+        { deck_id: deckId, due: LessThanOrEqual(new Date()) },
+        { deck_id: deckId, due: IsNull() },
+      ],
+    });
+
+    return cards;
   }
 }

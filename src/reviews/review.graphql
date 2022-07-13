@@ -1,0 +1,24 @@
+#import "../../cards/card.graphql"
+
+type Review {
+  id: ID!
+  delay_response: String!
+  card: Card!
+  created_at: String
+  updated_at: String
+}
+
+type Query {
+  reviews: [Review!]
+  review(id: ID!): Review
+}
+
+type Mutation {
+  createReview(input: ReviewInput!): Review
+}
+
+input ReviewInput {
+  cardId: ID!
+  cardAnswearId: ID!
+  delayResponse: String!
+}

@@ -18,6 +18,7 @@ import { LanguageModule } from 'src/languages/language.module';
 import { DeckModule } from 'src/decks/deck.module';
 import { UserModule } from 'src/users/user.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { ReviewModule } from 'src/reviews/review.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AuthModule } from 'src/auth/auth.module';
     DeckModule,
     UserModule,
     AuthModule,
+    ReviewModule,
   ],
   providers: [
     {
