@@ -13,24 +13,27 @@ export class CardService {
     private cardRepository: Repository<CardEntity>,
   ) {}
 
-  async all(): Promise<CardEntity[]> {
+  public async all(): Promise<CardEntity[]> {
     return this.cardRepository.find({
       relations: ['deck'],
     });
   }
 
-  async find(id: string): Promise<CardEntity> {
-    return this.cardRepository.findOne({
+  public async find(id: string): Promise<CardEntity> {
+    return this.cardRepository.findOneOrFail({
       where: { id },
       relations: ['deck', 'deck.languages'],
     });
   }
 
-  async create(createCardDto: CreateCardDto): Promise<CardEntity> {
+  public async create(createCardDto: CreateCardDto): Promise<CardEntity> {
     return this.cardRepository.save(createCardDto);
   }
 
-  async update(id: string, updateCardDto: UpdateCardDto): Promise<CardEntity> {
+  public async update(
+    id: string,
+    updateCardDto: UpdateCardDto,
+  ): Promise<CardEntity> {
     const deck = this.cardRepository.findOne({ where: { id } });
 
     if (!deck) {
@@ -40,7 +43,7 @@ export class CardService {
     return this.cardRepository.save({ ...updateCardDto, id });
   }
 
-  async delete(id: string): Promise<CardEntity> {
+  public async delete(id: string): Promise<CardEntity> {
     const card = await this.cardRepository.findOne({ where: { id } });
 
     if (!card) {
@@ -52,7 +55,7 @@ export class CardService {
     return card;
   }
 
-  async reviews(deckId: string): Promise<[CardEntity[], number]> {
+  public async reviews(deckId: string): Promise<[CardEntity[], number]> {
     const cards = await this.cardRepository.findAndCount({
       where: [
         { deck_id: deckId, due: LessThanOrEqual(new Date()) },

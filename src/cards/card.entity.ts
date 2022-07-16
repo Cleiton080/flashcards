@@ -22,6 +22,9 @@ export class CardEntity extends BaseEntity {
   @Column('varchar')
   back: string;
 
+  @Column('number')
+  current_interval: number;
+
   @Column('float')
   ease: number;
 

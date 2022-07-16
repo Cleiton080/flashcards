@@ -30,6 +30,11 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
             default: 2.5,
           },
           {
+            name: 'current_interval',
+            type: 'int',
+            isNullable: true,
+          },
+          {
             name: 'due',
             type: 'timestamp',
             isNullable: true,
