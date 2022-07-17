@@ -11,7 +11,7 @@ import {
   RoleGuard,
 } from 'nest-keycloak-connect';
 
-import { GraphqlService, TypeOrmService, KeycloakService } from 'src/config';
+import { GraphqlService, TypeOrmService, KeycloakService } from 'config';
 
 import { CardModule } from 'src/cards/card.module';
 import { LanguageModule } from 'src/languages/language.module';

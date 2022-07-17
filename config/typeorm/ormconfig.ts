@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { DataSource } from 'typeorm';
-import { TYPEORM } from '../../common/constants/global';
+import { TYPEORM } from '../../src/common/constants/global';
 
 export default new DataSource({
   ...TYPEORM,
