@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { KEYCLOAKDB } from '../common/constants/global';
+import { KEYCLOAKDB } from '../../src/common/constants/global';
 
 export class CreateUserTable1647829859299 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

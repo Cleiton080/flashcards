@@ -8,8 +8,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "migration:create": "typeorm migration:create",
-    "migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run --dataSource src/config/typeorm/ormconfig.ts",
-    "migration:rollback": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert --dataSource src/config/typeorm/ormconfig.ts",
+    "migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run --dataSource config/typeorm/ormconfig.ts",
+    "migration:rollback": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert --dataSource config/typeorm/ormconfig.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
