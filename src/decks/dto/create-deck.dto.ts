@@ -23,11 +23,6 @@ export class CreateDeckDto {
   @IsInt()
   @IsPositive()
   @IsOptional()
-  readonly learning_step_again: number;
-
-  @IsInt()
-  @IsPositive()
-  @IsOptional()
   readonly learning_step_good: number;
 
   @IsInt()

@@ -4,8 +4,8 @@
 type Deck {
   id: ID!
   name: String!
-  learning_step_again: Int
-  learning_step_good: Int
+  learning_steps: [String!]
+  re_learning_steps: [String!]
   graduating_interval: Int
   easy_interval: Int
   interval_modifier: Float
@@ -33,8 +33,6 @@ input LanguageDeck {
 
 input DeckInput {
   name: String!
-  learning_step_again: Int
-  learning_step_good: Int
   graduating_interval: Int
   easy_interval: Int
   interval_modifier: Float

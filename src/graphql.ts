@@ -25,8 +25,6 @@ export interface LanguageDeck {
 
 export interface DeckInput {
     name: string;
-    learning_step_again?: Nullable<number>;
-    learning_step_good?: Nullable<number>;
     graduating_interval?: Nullable<number>;
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
@@ -101,8 +99,8 @@ export interface IQuery {
 export interface Deck {
     id: string;
     name: string;
-    learning_step_again?: Nullable<number>;
-    learning_step_good?: Nullable<number>;
+    learning_steps?: Nullable<string[]>;
+    re_learning_steps?: Nullable<string[]>;
     graduating_interval?: Nullable<number>;
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;

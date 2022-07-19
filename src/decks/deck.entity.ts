@@ -12,6 +12,8 @@ import {
   JoinTable,
 } from 'typeorm';
 
+import { LearningStepsEntity } from 'src/decks/learning-steps/learning-steps.entity';
+
 @Entity('decks')
 export class DeckEntity extends BaseEntity {
   @PrimaryColumn('uuid', { generated: true, nullable: false })
@@ -19,12 +21,6 @@ export class DeckEntity extends BaseEntity {
 
   @Column('varchar')
   name!: string;
-
-  @Column('int')
-  learning_step_again: number;
-
-  @Column('int')
-  learning_step_good: number;
 
   @Column('int')
   graduating_interval: number;
@@ -57,6 +53,9 @@ export class DeckEntity extends BaseEntity {
     eager: true,
   })
   cards!: CardEntity[];
+
+  @OneToMany(() => LearningStepsEntity, (learningSteps) => learningSteps.deck)
+  learningSteps: LearningStepsEntity[];
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;

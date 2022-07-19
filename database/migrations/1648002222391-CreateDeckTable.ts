@@ -21,16 +21,6 @@ export class CreateDeckTable1648002222391 implements MigrationInterface {
             type: 'varchar(45)',
           },
           {
-            name: 'learning_step_again',
-            type: 'int',
-            default: 1,
-          },
-          {
-            name: 'learning_step_good',
-            type: 'int',
-            default: 10,
-          },
-          {
             name: 'graduating_interval',
             type: 'int',
             default: 1,
