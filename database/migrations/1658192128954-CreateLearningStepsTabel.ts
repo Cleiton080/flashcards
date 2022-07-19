@@ -49,7 +49,7 @@ export class CreateLearningStepsTabel1658192128954
     await queryRunner.addColumn(
       'learning_steps',
       new TableColumn({
-        name: 'card_id',
+        name: 'deck_id',
         type: 'uuid',
       }),
     );
@@ -57,9 +57,9 @@ export class CreateLearningStepsTabel1658192128954
     await queryRunner.createForeignKey(
       'learning_steps',
       new TableForeignKey({
-        columnNames: ['card_id'],
+        columnNames: ['deck_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'cards',
+        referencedTableName: 'decks',
       }),
     );
   }
@@ -67,11 +67,11 @@ export class CreateLearningStepsTabel1658192128954
   public async down(queryRunner: QueryRunner): Promise<void> {
     const learningStepsTable = await queryRunner.getTable('learning_steps');
     const foreignKey = learningStepsTable.foreignKeys.find((foreignKey) =>
-      foreignKey.columnNames.includes('card_id'),
+      foreignKey.columnNames.includes('deck_id'),
     );
 
     await queryRunner.dropForeignKey('learning_steps', foreignKey);
-    await queryRunner.dropColumn('learning_steps', 'card_id');
+    await queryRunner.dropColumn('learning_steps', 'deck_id');
     await queryRunner.dropTable('learning_steps');
   }
 }
