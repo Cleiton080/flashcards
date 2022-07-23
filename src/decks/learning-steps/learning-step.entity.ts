@@ -2,6 +2,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -9,7 +10,8 @@ import {
 } from 'typeorm';
 import { DeckEntity } from 'src/decks/deck.entity';
 
-export class LearningStepsEntity extends BaseEntity {
+@Entity('learning_steps')
+export class LearningStepEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,7 +21,7 @@ export class LearningStepsEntity extends BaseEntity {
   @Column('int')
   ordering: number;
 
-  @ManyToOne(() => DeckEntity, (deck) => deck.learningSteps)
+  @ManyToOne(() => DeckEntity, (deck) => deck.learning_steps)
   @JoinColumn({ name: 'deck_id', referencedColumnName: 'id' })
   deck: DeckEntity;
 

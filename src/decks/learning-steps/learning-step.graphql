@@ -1,0 +1,15 @@
+#import "../../decks/deck.graphql"
+
+type LearningStep {
+  id: ID!
+  interval_time: String!
+  ordering: Int!
+  deck: Deck!
+  deck_id: Int!
+  created_at: String!
+  updated_at: String
+}
+
+input LearningStepInput {
+  interval_time: String!
+}

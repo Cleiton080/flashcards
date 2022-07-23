@@ -29,7 +29,18 @@ export interface DeckInput {
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
     easy_bonus?: Nullable<number>;
+    user_id: string;
+    learning_steps: LearningStepInput[];
+    re_learning_steps: ReLearningStepInput[];
     languages: LanguageDeck[];
+}
+
+export interface LearningStepInput {
+    interval_time: string;
+}
+
+export interface ReLearningStepInput {
+    interval_time: string;
 }
 
 export interface LanguageInput {
@@ -99,14 +110,35 @@ export interface IQuery {
 export interface Deck {
     id: string;
     name: string;
-    learning_steps?: Nullable<string[]>;
-    re_learning_steps?: Nullable<string[]>;
+    user_id: string;
+    learningSteps?: Nullable<LearningStep[]>;
+    reLearningSteps?: Nullable<ReLearningStep[]>;
     graduating_interval?: Nullable<number>;
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;
     easy_bonus?: Nullable<number>;
     languages: Nullable<Language>[];
     cards?: Nullable<Nullable<Card>[]>;
+    created_at?: Nullable<string>;
+    updated_at?: Nullable<string>;
+}
+
+export interface LearningStep {
+    id: string;
+    interval_time: string;
+    ordering: number;
+    deck: Deck;
+    deck_id: number;
+    created_at: string;
+    updated_at?: Nullable<string>;
+}
+
+export interface ReLearningStep {
+    id: string;
+    interval_time: string;
+    ordering: number;
+    deck?: Nullable<Deck>;
+    deck_id: number;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
 }

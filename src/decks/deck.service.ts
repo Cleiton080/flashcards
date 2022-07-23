@@ -26,6 +26,7 @@ export class DeckService {
   }
 
   async create(createDeckDto: CreateDeckDto): Promise<DeckEntity> {
+    console.log(createDeckDto);
     return this.deckRepository.save(createDeckDto);
   }
 

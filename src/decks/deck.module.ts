@@ -3,10 +3,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DeckEntity } from 'src/decks/deck.entity';
 import { DeckResolver } from 'src/decks/deck.resolver';
 import { DeckService } from 'src/decks/deck.service';
-import { LearningStepsModule } from './learning-steps/learning-steps.module';
+import { LearningStepModule } from 'src/decks/learning-steps/learning-step.module';
+import { ReLearningStepModule } from 'src/decks/re-learning-steps/re-learning-step.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DeckEntity]), LearningStepsModule],
+  imports: [
+    TypeOrmModule.forFeature([DeckEntity]),
+    LearningStepModule,
+    ReLearningStepModule,
+  ],
   providers: [DeckService, DeckResolver],
 })
 export class DeckModule {}

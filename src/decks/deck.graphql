@@ -1,11 +1,14 @@
 #import "../../languages/language.graphql"
 #import "../../cards/card.graphql"
+#import "./learning-steps/learning-step.graphql"
+#import "./re-learning-steps/re-learning-step.graphql"
 
 type Deck {
   id: ID!
   name: String!
-  learning_steps: [String!]
-  re_learning_steps: [String!]
+  user_id: String!
+  learningSteps: [LearningStep!]
+  reLearningSteps: [ReLearningStep!]
   graduating_interval: Int
   easy_interval: Int
   interval_modifier: Float
@@ -37,5 +40,8 @@ input DeckInput {
   easy_interval: Int
   interval_modifier: Float
   easy_bonus: Float
+  user_id: String!
+  learning_steps: [LearningStepInput!]!
+  re_learning_steps: [ReLearningStepInput!]!
   languages: [LanguageDeck!]!
 }

@@ -12,7 +12,9 @@ import {
   Length,
   ValidateNested,
 } from 'class-validator';
-import { DeckLanguageDto } from './deck-language.dto';
+import { CreateLearningStepDto } from 'src/decks/learning-steps/dto/create-learning-step.dto';
+import { CreateReLearningStepDto } from 'src/decks/re-learning-steps/dto/create-re-learning-step.dto';
+import { DeckLanguageDto } from 'src/decks/dto/deck-language.dto';
 
 export class CreateDeckDto {
   @IsString()
@@ -43,10 +45,28 @@ export class CreateDeckDto {
   @IsOptional()
   readonly easy_bonus: number;
 
+  @IsNotEmpty()
+  @IsString()
+  readonly user_id: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMaxSize(2)
   @ArrayMinSize(2)
   @Type(() => DeckLanguageDto)
   readonly languages: DeckLanguageDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMaxSize(2)
+  @ArrayMinSize(2)
+  @Type(() => CreateLearningStepDto)
+  readonly learning_steps: CreateLearningStepDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMaxSize(2)
+  @ArrayMinSize(2)
+  @Type(() => CreateReLearningStepDto)
+  readonly re_learning_steps: CreateReLearningStepDto[];
 }

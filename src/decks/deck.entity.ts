@@ -12,7 +12,8 @@ import {
   JoinTable,
 } from 'typeorm';
 
-import { LearningStepsEntity } from 'src/decks/learning-steps/learning-steps.entity';
+import { LearningStepEntity } from 'src/decks/learning-steps/learning-step.entity';
+import { ReLearningStepEntity } from 'src/decks/re-learning-steps/re-learning-step.entity';
 
 @Entity('decks')
 export class DeckEntity extends BaseEntity {
@@ -34,6 +35,9 @@ export class DeckEntity extends BaseEntity {
   @Column('float')
   easy_bonus: number;
 
+  @Column('varchar')
+  user_id: string;
+
   @ManyToMany(() => LanguageEntity, (language) => language.decks, {
     eager: true,
     cascade: ['insert'],
@@ -54,8 +58,21 @@ export class DeckEntity extends BaseEntity {
   })
   cards!: CardEntity[];
 
-  @OneToMany(() => LearningStepsEntity, (learningSteps) => learningSteps.deck)
-  learningSteps: LearningStepsEntity[];
+  @OneToMany(() => LearningStepEntity, (learningSteps) => learningSteps.deck, {
+    eager: true,
+    cascade: ['insert'],
+  })
+  learning_steps: LearningStepEntity[];
+
+  @OneToMany(
+    () => ReLearningStepEntity,
+    (reLearningSteps) => reLearningSteps.deck,
+    {
+      eager: true,
+      cascade: ['insert'],
+    },
+  )
+  re_learning_steps: ReLearningStepEntity[];
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;
