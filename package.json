@@ -39,6 +39,7 @@
     "class-validator": "^0.13.2",
     "graphql": "^15.8.0",
     "keycloak-connect": "^15.1.1",
+    "moment": "^2.29.4",
     "nest-keycloak-connect": "^1.8.3",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",

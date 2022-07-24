@@ -6,6 +6,7 @@ import { CardEntity } from 'src/cards/card.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { REVIEW_ANSWEAR } from 'src/reviews/review.enum';
 import { CreateReviewDto } from 'src/reviews/dto/create-review.dto';
+import * as moment from 'moment';
 
 @Injectable()
 export class ReviewService {
@@ -20,24 +21,25 @@ export class ReviewService {
   }
 
   public async create(createReviewDto: CreateReviewDto): Promise<ReviewEntity> {
-    const { cardId, cardAnswearId, delayResponse } = createReviewDto;
+    const { cardId, cardAnswerId, delayResponse } = createReviewDto;
 
     const card = await this.cardService.find(cardId);
 
-    card.ease = this.calculateCardEase(card, cardAnswearId);
-    card.current_interval = this.calculateCardInterval(card, cardAnswearId);
+    card.ease = this.calculateCardEase(card, cardAnswerId);
+    card.current_interval = this.calculateCardInterval(card, cardAnswerId);
+    card.due = moment(card.due).add(card.current_interval, 'days').toDate();
 
     await card.save();
 
     return this.reviewRepository.save({
       delay_response: delayResponse,
       card_id: cardId,
-      review_answear_id: cardAnswearId,
+      review_answer_id: cardAnswerId,
     });
   }
 
-  public calculateCardEase(card: CardEntity, cardAnswearId: string): number {
-    switch (cardAnswearId) {
+  public calculateCardEase(card: CardEntity, cardAnswerId: string): number {
+    switch (cardAnswerId) {
       case REVIEW_ANSWEAR.AGAIN:
         return card.ease - 0.2 * card.ease; // subtract 20% from ease factor
       case REVIEW_ANSWEAR.EASY:
@@ -51,11 +53,8 @@ export class ReviewService {
     }
   }
 
-  public calculateCardInterval(
-    card: CardEntity,
-    cardAnswearId: string,
-  ): number {
-    switch (cardAnswearId) {
+  public calculateCardInterval(card: CardEntity, cardAnswerId: string): number {
+    switch (cardAnswerId) {
       case REVIEW_ANSWEAR.AGAIN:
         return this.markCardAsAgain(card);
       case REVIEW_ANSWEAR.EASY:
@@ -70,7 +69,9 @@ export class ReviewService {
   }
 
   public markCardAsGood(card: CardEntity): number {
-    return card.current_interval * card.ease * card.deck.interval_modifier;
+    return Math.ceil(
+      card.current_interval * card.ease * card.deck.interval_modifier,
+    );
   }
 
   public markCardAsAgain(card: CardEntity): number {
@@ -78,15 +79,15 @@ export class ReviewService {
   }
 
   public markCardAsHard(card: CardEntity): number {
-    return card.current_interval * 1.2 * card.deck.interval_modifier;
+    return Math.ceil(card.current_interval * 1.2 * card.deck.interval_modifier);
   }
 
   public markCardAsEasy(card: CardEntity): number {
-    return (
+    return Math.ceil(
       card.current_interval *
-      card.ease *
-      card.deck.interval_modifier *
-      card.deck.easy_bonus
+        card.ease *
+        card.deck.interval_modifier *
+        card.deck.easy_bonus,
     );
   }
 }
