@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CardEntity } from 'src/cards/card.entity';
 import { DeckEntity } from 'src/decks/deck.entity';
 import { DeckResolver } from 'src/decks/deck.resolver';
 import { DeckService } from 'src/decks/deck.service';
@@ -8,7 +9,7 @@ import { ReLearningStepModule } from 'src/decks/re-learning-steps/re-learning-st
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([DeckEntity]),
+    TypeOrmModule.forFeature([DeckEntity, CardEntity]),
     LearningStepModule,
     ReLearningStepModule,
   ],

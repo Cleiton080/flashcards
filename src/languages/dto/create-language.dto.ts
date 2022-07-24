@@ -1,8 +1,8 @@
-import { IsNotEmpty, IsString, Max } from 'class-validator';
+import { IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class CreateLanguageDto {
   @IsString()
   @IsNotEmpty()
-  @Max(45)
+  @Length(1, 45)
   name: string;
 }

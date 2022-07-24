@@ -1,5 +1,6 @@
 import { ParseUUIDPipe, ValidationPipe } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CardEntity } from 'src/cards/card.entity';
 import { DeckEntity } from './deck.entity';
 import { DeckService } from './deck.service';
 import { CreateDeckDto } from './dto/create-deck.dto';

@@ -89,17 +89,11 @@ export interface Card {
     updated_at?: Nullable<string>;
 }
 
-export interface ReviewCard {
-    total: number;
-    cards: Nullable<Card>[];
-}
-
 export interface IQuery {
     cards(): Nullable<Nullable<Card>[]> | Promise<Nullable<Nullable<Card>[]>>;
     card(id: string): Nullable<Card> | Promise<Nullable<Card>>;
-    reviewCards(deckId: string): Nullable<ReviewCard> | Promise<Nullable<ReviewCard>>;
     decks(): Nullable<Deck>[] | Promise<Nullable<Deck>[]>;
-    deck(id: string): Deck | Promise<Deck>;
+    deck(id: string): DeckWithCardsReview | Promise<DeckWithCardsReview>;
     languages(): Nullable<Nullable<Language>[]> | Promise<Nullable<Nullable<Language>[]>>;
     language(id: string): Nullable<Language> | Promise<Nullable<Language>>;
     reviews(): Nullable<Review[]> | Promise<Nullable<Review[]>>;
@@ -119,6 +113,23 @@ export interface Deck {
     easy_bonus?: Nullable<number>;
     languages: Nullable<Language>[];
     cards?: Nullable<Nullable<Card>[]>;
+    created_at?: Nullable<string>;
+    updated_at?: Nullable<string>;
+}
+
+export interface DeckWithCardsReview {
+    id: string;
+    name: string;
+    user_id: string;
+    learningSteps?: Nullable<LearningStep[]>;
+    reLearningSteps?: Nullable<ReLearningStep[]>;
+    graduating_interval?: Nullable<number>;
+    easy_interval?: Nullable<number>;
+    interval_modifier?: Nullable<number>;
+    easy_bonus?: Nullable<number>;
+    languages: Nullable<Language>[];
+    cards?: Nullable<Nullable<Card>[]>;
+    cards_review: Nullable<Card>[];
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
 }

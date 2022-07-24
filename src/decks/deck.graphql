@@ -19,9 +19,26 @@ type Deck {
   updated_at: String
 }
 
+type DeckWithCardsReview {
+  id: ID!
+  name: String!
+  user_id: String!
+  learningSteps: [LearningStep!]
+  reLearningSteps: [ReLearningStep!]
+  graduating_interval: Int
+  easy_interval: Int
+  interval_modifier: Float
+  easy_bonus: Float
+  languages: [Language]!
+  cards: [Card]
+  cards_review: [Card]!
+  created_at: String
+  updated_at: String
+}
+
 type Query {
   decks: [Deck]!
-  deck(id: ID!): Deck!
+  deck(id: ID!): DeckWithCardsReview!
 }
 
 type Mutation {

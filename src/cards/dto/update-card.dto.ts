@@ -1,12 +1,7 @@
-import {
-  IsDateString,
-  IsDecimal,
-  IsNotEmpty,
-  IsString,
-  IsUUID,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UpdateCardDto {
+  @IsOptional()
   @IsString()
   readonly type: string;
 
@@ -21,10 +16,4 @@ export class UpdateCardDto {
   @IsUUID()
   @IsNotEmpty()
   readonly deck_id: string;
-
-  @IsDecimal()
-  readonly ease: number;
-
-  @IsDateString()
-  readonly due: Date;
 }

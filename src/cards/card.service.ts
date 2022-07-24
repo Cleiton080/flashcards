@@ -54,15 +54,4 @@ export class CardService {
 
     return card;
   }
-
-  public async reviews(deckId: string): Promise<[CardEntity[], number]> {
-    const cards = await this.cardRepository.findAndCount({
-      where: [
-        { deck_id: deckId, due: LessThanOrEqual(new Date()) },
-        { deck_id: deckId, due: IsNull() },
-      ],
-    });
-
-    return cards;
-  }
 }
