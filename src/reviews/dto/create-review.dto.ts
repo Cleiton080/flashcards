@@ -7,7 +7,7 @@ export class CreateReviewDto {
 
   @IsNotEmpty()
   @IsUUID()
-  readonly cardAnswearId: string;
+  readonly cardAnswerId: string;
 
   @Matches(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)
   @IsNotEmpty()

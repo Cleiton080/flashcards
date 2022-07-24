@@ -6,13 +6,13 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CreateReviewAnswearsTable1657847025218
+export class CreateReviewAnswersTable1657847025218
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'review_answears',
+        name: 'review_answers',
         columns: [
           {
             name: 'id',
@@ -44,7 +44,7 @@ export class CreateReviewAnswearsTable1657847025218
     await queryRunner.addColumn(
       'reviews',
       new TableColumn({
-        name: 'review_answear_id',
+        name: 'review_answer_id',
         type: 'uuid',
       }),
     );
@@ -52,9 +52,9 @@ export class CreateReviewAnswearsTable1657847025218
     await queryRunner.createForeignKey(
       'reviews',
       new TableForeignKey({
-        columnNames: ['review_answear_id'],
+        columnNames: ['review_answer_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'review_answears',
+        referencedTableName: 'review_answers',
       }),
     );
   }
@@ -62,11 +62,11 @@ export class CreateReviewAnswearsTable1657847025218
   public async down(queryRunner: QueryRunner): Promise<void> {
     const reviewsTable = await queryRunner.getTable('reviews');
     const foreignKey = await reviewsTable.foreignKeys.find((foreignKey) =>
-      foreignKey.columnNames.includes('review_answear_id'),
+      foreignKey.columnNames.includes('review_answer_id'),
     );
 
     await queryRunner.dropForeignKey('reviews', foreignKey);
-    await queryRunner.dropColumn('reviews', 'review_answear_id');
-    await queryRunner.dropTable('review_answears');
+    await queryRunner.dropColumn('reviews', 'review_answer_id');
+    await queryRunner.dropTable('review_answers');
   }
 }

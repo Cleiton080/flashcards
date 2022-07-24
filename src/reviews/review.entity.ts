@@ -26,7 +26,7 @@ export class ReviewEntity extends BaseEntity {
   card_id: string;
 
   @Column('uuid')
-  review_answear_id: string;
+  review_answer_id: string;
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;

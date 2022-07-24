@@ -49,7 +49,7 @@ export interface LanguageInput {
 
 export interface ReviewInput {
     cardId: string;
-    cardAnswearId: string;
+    cardAnswerId: string;
     delayResponse: string;
 }
 

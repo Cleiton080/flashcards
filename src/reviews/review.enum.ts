@@ -1,6 +1,6 @@
 export enum REVIEW_ANSWEAR {
-  GOOD = '33a6c57a-86ab-4902-86fd-50e9b5d64a10',
-  AGAIN = 'f916b552-66a5-475b-8622-c3a1269d8dc5',
-  HARD = '9305c1aa-6445-46c8-8639-a380eebf7d21',
-  EASY = 'fd202b65-fd6b-4cd8-8bca-896db36c409b',
+  AGAIN = 'b3759358-8af7-4a1b-a86b-cbb5d67c06e2',
+  EASY = '55d38189-ba56-4d03-8bdf-811867f33185',
+  GOOD = '4a2c9365-b7d9-4f46-aecc-ec1d1b2a8d95',
+  HARD = '1bc68530-3d0a-49a3-b9c6-ac7e2c4a2fdb',
 }

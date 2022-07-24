@@ -19,6 +19,6 @@ type Mutation {
 
 input ReviewInput {
   cardId: ID!
-  cardAnswearId: ID!
+  cardAnswerId: ID!
   delayResponse: String!
 }

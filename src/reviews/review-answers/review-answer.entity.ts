@@ -2,11 +2,13 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-export class ReviewAnswearEntity extends BaseEntity {
+@Entity('review_answers')
+export class ReviewAnswerEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
