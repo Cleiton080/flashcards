@@ -5,10 +5,8 @@ import { TYPEORM } from '../../src/common/constants/global';
 export default new DataSource({
   ...TYPEORM,
   type: 'postgres',
-  entities: [join(__dirname, '..', '..', '**', '*.entity.{ts, js}')],
-  migrations: [
-    join(__dirname, '..', '..', 'database', 'migrations', '*.{ts, js}'),
-  ],
+  entities: ['dist/**/*.entity.js'],
+  migrations: ['dist/database/migrations/*.js'],
   synchronize: false,
   autoLoadEntities: true,
   useNewUrlParser: true,
