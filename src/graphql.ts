@@ -105,8 +105,8 @@ export interface Deck {
     id: string;
     name: string;
     user_id: string;
-    learningSteps?: Nullable<LearningStep[]>;
-    reLearningSteps?: Nullable<ReLearningStep[]>;
+    learning_steps?: Nullable<LearningStep[]>;
+    re_learning_steps?: Nullable<ReLearningStep[]>;
     graduating_interval?: Nullable<number>;
     easy_interval?: Nullable<number>;
     interval_modifier?: Nullable<number>;

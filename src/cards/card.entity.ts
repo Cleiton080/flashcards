@@ -32,7 +32,9 @@ export class CardEntity extends BaseEntity {
   @Column('timestamp')
   due: Date;
 
-  @OneToMany(() => ReviewEntity, (review) => review.card)
+  @OneToMany(() => ReviewEntity, (review) => review.card, {
+    eager: true,
+  })
   reviews: ReviewEntity[];
 
   @ManyToOne(() => DeckEntity, (deck) => deck.cards)

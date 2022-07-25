@@ -7,8 +7,8 @@ type Deck {
   id: ID!
   name: String!
   user_id: String!
-  learningSteps: [LearningStep!]
-  reLearningSteps: [ReLearningStep!]
+  learning_steps: [LearningStep!]
+  re_learning_steps: [ReLearningStep!]
   graduating_interval: Int
   easy_interval: Int
   interval_modifier: Float

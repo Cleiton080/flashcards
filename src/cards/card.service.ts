@@ -16,14 +16,37 @@ export class CardService {
 
   public async all(): Promise<CardEntity[]> {
     return this.cardRepository.find({
-      relations: ['deck'],
+      relations: {
+        deck: {
+          learning_steps: true,
+        },
+      },
+      order: {
+        deck: {
+          learning_steps: {
+            ordering: 'ASC',
+          },
+        },
+      },
     });
   }
 
   public async find(id: string): Promise<CardEntity> {
     return this.cardRepository.findOneOrFail({
       where: { id },
-      relations: ['deck', 'deck.languages'],
+      relations: {
+        deck: {
+          languages: true,
+          learning_steps: true,
+        },
+      },
+      order: {
+        deck: {
+          learning_steps: {
+            ordering: 'ASC',
+          },
+        },
+      },
     });
   }
 

@@ -7,6 +7,7 @@ import { ReviewEntity } from 'src/reviews/review.entity';
 import { REVIEW_ANSWEAR } from 'src/reviews/review.enum';
 import { CreateReviewDto } from 'src/reviews/dto/create-review.dto';
 import * as moment from 'moment';
+import { CardStageEnum } from 'src/cards/card-stages/card-stage.enum';
 
 @Injectable()
 export class ReviewService {
@@ -25,9 +26,30 @@ export class ReviewService {
 
     const card = await this.cardService.find(cardId);
 
-    card.ease = this.calculateCardEase(card, cardAnswerId);
-    card.current_interval = this.calculateCardInterval(card, cardAnswerId);
-    card.due = moment(card.due).add(card.current_interval, 'days').toDate();
+    switch (card.card_stage_id) {
+      case CardStageEnum.LEARNING:
+        const cardLearningStep = card.deck.learning_steps.at(
+          card.reviews.length,
+        );
+
+        if (cardLearningStep) {
+          card.due = moment()
+            .add(cardLearningStep.interval_time, 'minutes')
+            .toDate();
+          break;
+        }
+
+        card.card_stage_id = CardStageEnum.GRADUATED;
+      case CardStageEnum.GRADUATED:
+        card.ease = this.calculateCardEase(card, cardAnswerId);
+        card.current_interval = this.calculateCardInterval(card, cardAnswerId);
+        card.due = moment().add(card.current_interval, 'days').toDate();
+        break;
+      case CardStageEnum.RELEARNING:
+        break;
+      default:
+        break;
+    }
 
     await card.save();
 
