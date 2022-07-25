@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CardEntity } from 'src/cards/card.entity';
 import { CreateCardDto } from 'src/cards/dto/create-card.dto';
 import { UpdateCardDto } from 'src/cards/dto/update-card.dto';
+import { CardStageEnum } from './card-stages/card-stage.enum';
 
 @Injectable()
 export class CardService {
@@ -27,7 +28,10 @@ export class CardService {
   }
 
   public async create(createCardDto: CreateCardDto): Promise<CardEntity> {
-    return this.cardRepository.save(createCardDto);
+    return this.cardRepository.save({
+      ...createCardDto,
+      card_stage_id: CardStageEnum.LEARNING,
+    });
   }
 
   public async update(

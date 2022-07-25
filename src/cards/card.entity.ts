@@ -10,6 +10,7 @@ import {
   OneToMany,
   UpdateDateColumn,
 } from 'typeorm';
+import { CardStageEntity } from './card-stages/card-stage.entity';
 
 @Entity('cards')
 export class CardEntity extends BaseEntity {
@@ -40,6 +41,13 @@ export class CardEntity extends BaseEntity {
 
   @Column('uuid')
   deck_id!: string;
+
+  @ManyToOne(() => CardStageEntity, (cardStage) => cardStage.cards)
+  @JoinColumn({ name: 'card_stage_id', referencedColumnName: 'id' })
+  card_stage: CardStageEntity;
+
+  @Column('uuid')
+  card_stage_id!: string;
 
   @CreateDateColumn({ default: 'CURRENT_TIMESTAMP' })
   created_at: Date;
