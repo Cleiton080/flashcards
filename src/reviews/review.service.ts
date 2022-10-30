@@ -25,41 +25,59 @@ export class ReviewService {
     return card.due.getTime() <= Date.now();
   }
 
+  private async learning(
+    card: CardEntity,
+    cardAnswerId?: string,
+  ): Promise<CardEntity> {
+    const cardLearningStep = card.deck.learning_steps.at(card.reviews.length);
+
+    if (cardLearningStep) {
+      card.due = moment()
+        .add(cardLearningStep.interval_time, 'minutes')
+        .toDate();
+
+      return card;
+    }
+
+    card.card_stage_id = CardStageEnum.GRADUATED;
+
+    return this.graduated(card, cardAnswerId);
+  }
+
+  private async graduated(
+    card: CardEntity,
+    cardAnswerId: string,
+  ): Promise<CardEntity> {
+    card.ease = this.calculateCardEase(card, cardAnswerId);
+    card.current_interval = this.calculateCardInterval(card, cardAnswerId);
+    card.due = moment().add(card.current_interval, 'days').toDate();
+
+    return card;
+  }
+
   public async create(createReviewDto: CreateReviewDto): Promise<ReviewEntity> {
     const { cardId, cardAnswerId, delayResponse } = createReviewDto;
 
     const card = await this.cardService.find(cardId);
 
     if (!this.cardCanBeReviewed(card)) {
-      throw new Error("Card cannot be reviewed right now!");
+      throw new Error('Card cannot be reviewed right now!');
     }
 
     switch (card.card_stage_id) {
       case CardStageEnum.LEARNING:
-        const cardLearningStep = card.deck.learning_steps.at(
-          card.reviews.length,
-        );
-
-        if (cardLearningStep) {
-          card.due = moment()
-            .add(cardLearningStep.interval_time, 'minutes')
-            .toDate();
-          break;
-        }
-
-        card.card_stage_id = CardStageEnum.GRADUATED;
+        const cardLearning = await this.learning(card, cardAnswerId);
+        await cardLearning.save();
+        break;
       case CardStageEnum.GRADUATED:
-        card.ease = this.calculateCardEase(card, cardAnswerId);
-        card.current_interval = this.calculateCardInterval(card, cardAnswerId);
-        card.due = moment().add(card.current_interval, 'days').toDate();
+        const cardGraduated = await this.graduated(card, cardAnswerId);
+        await cardGraduated.save();
         break;
       case CardStageEnum.RELEARNING:
         break;
       default:
         break;
     }
-
-    await card.save();
 
     return this.reviewRepository.save({
       delay_response: delayResponse,
