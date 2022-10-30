@@ -1,12 +1,13 @@
 import { join } from 'path';
-import { DataSource } from 'typeorm';
 import { TYPEORM } from '../../src/common/constants/global';
 
-export default new DataSource({
+export default {
   ...TYPEORM,
   type: 'postgres',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/database/migrations/*.js'],
+  seeds: ['dist/database/seeds/*.js'],
+  factories: ['dist/database/factories/*.js'],
   synchronize: false,
   autoLoadEntities: true,
   useNewUrlParser: true,
@@ -16,4 +17,4 @@ export default new DataSource({
   cli: {
     migrationDir: join(__dirname, '..', '..', 'database', 'migrations'),
   },
-});
+};

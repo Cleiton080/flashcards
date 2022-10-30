@@ -4,14 +4,13 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { CardEntity } from '../card.entity';
 
 @Entity('card_stages')
 export class CardStageEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @Column('uuid', { primary: true })
   id: string;
 
   @Column('varchar')

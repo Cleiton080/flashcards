@@ -21,10 +21,18 @@ export class ReviewService {
     return this.reviewRepository.find();
   }
 
+  private cardCanBeReviewed(card: CardEntity): boolean {
+    return card.due.getTime() <= Date.now();
+  }
+
   public async create(createReviewDto: CreateReviewDto): Promise<ReviewEntity> {
     const { cardId, cardAnswerId, delayResponse } = createReviewDto;
 
     const card = await this.cardService.find(cardId);
+
+    if (!this.cardCanBeReviewed(card)) {
+      throw new Error("Card cannot be reviewed right now!");
+    }
 
     switch (card.card_stage_id) {
       case CardStageEnum.LEARNING:

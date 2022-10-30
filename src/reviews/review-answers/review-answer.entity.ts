@@ -3,13 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('review_answers')
 export class ReviewAnswerEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @Column('uuid', { primary: true })
   id: string;
 
   @Column()
