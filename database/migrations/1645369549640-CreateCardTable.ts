@@ -30,6 +30,16 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
             default: 2.5,
           },
           {
+            name: 'learning_step',
+            type: 'int',
+            default: 0,
+          },
+          {
+            name: 're_learning_step',
+            type: 'int',
+            default: 0,
+          },
+          {
             name: 'current_interval',
             type: 'int',
             isNullable: true,
@@ -37,7 +47,7 @@ export class CreateCardTable1645369549640 implements MigrationInterface {
           {
             name: 'due',
             type: 'timestamp',
-            isNullable: true,
+            default: 'CURRENT_TIMESTAMP',
           },
           {
             name: 'deck_id',

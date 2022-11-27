@@ -85,6 +85,8 @@ export interface Card {
     due?: Nullable<string>;
     ease?: Nullable<number>;
     deck?: Nullable<Deck>;
+    learning_step?: Nullable<number>;
+    re_learning_step?: Nullable<number>;
     created_at?: Nullable<string>;
     updated_at?: Nullable<string>;
 }

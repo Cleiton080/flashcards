@@ -6,11 +6,19 @@ import { ReviewResolver } from 'src/reviews/review.resolver';
 import { CardService } from 'src/cards/card.service';
 import { CardEntity } from 'src/cards/card.entity';
 import { LanguageEntity } from 'src/languages/language.entity';
+import { ReviewGraduatedService } from './review-graduated/review-graduated.service';
+import { ReviewLearningService } from './review-learning/review-learning.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([ReviewEntity, CardEntity, LanguageEntity]),
   ],
-  providers: [ReviewService, CardService, ReviewResolver],
+  providers: [
+    ReviewService,
+    CardService,
+    ReviewResolver,
+    ReviewGraduatedService,
+    ReviewLearningService,
+  ],
 })
 export class ReviewModule {}

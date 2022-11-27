@@ -29,6 +29,12 @@ export class CardEntity extends BaseEntity {
   @Column('float')
   ease: number;
 
+  @Column('int4')
+  learning_step: number;
+
+  @Column('int4')
+  re_learning_step: number;
+
   @Column('timestamp')
   due: Date;
 

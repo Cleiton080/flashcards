@@ -8,6 +8,8 @@ type Card {
   due: String
   ease: Float
   deck: Deck
+  learning_step: Int
+  re_learning_step: Int
   created_at: String
   updated_at: String
 }

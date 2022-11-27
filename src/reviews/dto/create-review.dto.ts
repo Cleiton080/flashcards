@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsUUID, Matches } from 'class-validator';
+import { REVIEW_ANSWEAR } from '../review.enum';
 
 export class CreateReviewDto {
   @IsNotEmpty()
@@ -7,7 +8,7 @@ export class CreateReviewDto {
 
   @IsNotEmpty()
   @IsUUID()
-  readonly cardAnswerId: string;
+  readonly cardAnswerId: REVIEW_ANSWEAR;
 
   @Matches(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)
   @IsNotEmpty()
